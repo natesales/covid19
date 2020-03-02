@@ -58,4 +58,4 @@ for location in yesterday_dict:
 	number_yesterday = yesterday_dict[location]
 
 	if number_today > number_yesterday:
-		print("Yesterday " + location, "had " + str(number_yesterday) + " confirmed cases. Now there is " + str(number_today))
+		print("Yesterday " + location, "had " + str(number_yesterday) + " confirmed cases. Now there is " + str(number_today) + " That is " + str((number_today - number_yesterday)) + " more.")
