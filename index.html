@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>COVID-19 - Corona Virus</title>
+    <script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
+    <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+<div style="width:75%;">
+    <canvas id="canvas"></canvas>
+
+    <br>
+
+    <canvas id="pie"></canvas>
+</div>
+</body>
+
+<script>
+    const config = {
+        type: 'line',
+        data: {
+            labels: {{ dates }},
+            datasets: [{
+                label: 'Confirmed',
+                backgroundColor: window.chartColors.blue,
+                borderColor: window.chartColors.blue,
+                data: {{ dataConfirmed }},
+                fill: false,
+            }, {
+                label: 'Recovered',
+                fill: false,
+                backgroundColor: window.chartColors.green,
+                borderColor: window.chartColors.green,
+                data: {{ dataRecovered }},
+            }, {
+                label: 'Deaths',
+                fill: false,
+                backgroundColor: window.chartColors.red,
+                borderColor: window.chartColors.red,
+                data: {{ dataDeaths }},
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Cases'
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Date'
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Cases'
+                    }
+                }]
+            }
+        }
+    };
+
+    const ctx = document.getElementById('canvas').getContext('2d');
+    window.myLine = new Chart(ctx, config);
+
+
+    var myPieChart = new Chart(document.getElementById('pie').getContext('2d'), {
+        type: 'pie',
+        data: data = {
+            datasets: [{
+                data: [{{ numRecovered }}, 20, 30],
+                backgroundColor: [
+                    window.chartColors.green,
+                    window.chartColors.yellow,
+                    window.chartColors.red
+                ],
+
+            }],
+
+            labels: [
+                'Recovered',
+                'Sick',
+                'Dead'
+            ]
+
+
+        }
+    });
+</script>
+
+</html>
+
